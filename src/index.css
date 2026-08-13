@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   DARK MODE (DEFAULT)
+   ═══════════════════════════════════════════════════ */
+html.dark body {
+  background-color: #090d16;
+  color: #f8fafc;
+}
+
+/* ─── Glass Panels (Dark) ─── */
+html.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+/* ═══════════════════════════════════════════════════
+   LIGHT MODE — COMPREHENSIVE OVERRIDES
+   ═══════════════════════════════════════════════════ */
+html.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* ─── Glass Panels (Light) ─── */
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+}
+
+/* ─── Text Colors ─── */
+html.light .text-white {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* ─── Background Colors ─── */
+html.light .bg-slate-900 {
+  background-color: #f1f5f9 !important;
+}
+
+html.light .bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+
+html.light .bg-slate-950\/40 {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+html.light .bg-slate-900\/60 {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+
+html.light .bg-slate-900\/80 {
+  background-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+html.light .bg-slate-800 {
+  background-color: #e2e8f0 !important;
+}
+
+html.light .bg-slate-800\/60 {
+  background-color: rgba(226, 232, 240, 0.6) !important;
+}
+
+html.light .bg-slate-800\/80 {
+  background-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+/* ─── Hardcoded dark BGs used in Navbar/Hero ─── */
+html.light .bg-\[\#090d16\]\/90 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.light .bg-\[\#0b0f19\]\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ─── Border Colors ─── */
+html.light .border-slate-800 {
+  border-color: #e2e8f0 !important;
+}
+
+html.light .border-slate-700 {
+  border-color: #cbd5e1 !important;
+}
+
+html.light .border-slate-700\/60 {
+  border-color: rgba(203, 213, 225, 0.6) !important;
+}
+
+html.light .border-slate-600 {
+  border-color: #94a3b8 !important;
+}
+
+html.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ─── Gradient overlays on images ─── */
+html.light .from-slate-950\/90 {
+  --tw-gradient-from: rgba(241, 245, 249, 0.9) !important;
+}
+
+html.light .from-slate-950 {
+  --tw-gradient-from: #f1f5f9 !important;
+}
+
+html.light .via-slate-950\/20 {
+  --tw-gradient-via: rgba(241, 245, 249, 0.2) !important;
+}
+
+html.light .via-slate-950\/40 {
+  --tw-gradient-via: rgba(241, 245, 249, 0.4) !important;
+}
+
+/* ─── Indigo tinted text in light mode ─── */
+html.light .text-indigo-300 {
+  color: #4338ca !important;
+}
+
+html.light .text-indigo-400 {
+  color: #4f46e5 !important;
+}
+
+html.light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+html.light .text-amber-400 {
+  color: #d97706 !important;
+}
+
+html.light .text-cyan-400 {
+  color: #0891b2 !important;
+}
+
+html.light .text-pink-400 {
+  color: #db2777 !important;
+}
+
+html.light .text-purple-400 {
+  color: #7c3aed !important;
+}
+
+/* ─── Indigo tinted backgrounds ─── */
+html.light .bg-indigo-500\/10 {
+  background-color: rgba(79, 70, 229, 0.08) !important;
+}
+
+html.light .bg-indigo-500\/15 {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+}
+
+html.light .bg-indigo-600\/20 {
+  background-color: rgba(79, 70, 229, 0.12) !important;
+}
+
+html.light .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.08) !important;
+}
+
+/* ─── Input / Form fields ─── */
+html.light input,
+html.light textarea {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light input:focus,
+html.light textarea:focus {
+  border-color: rgba(99, 102, 241, 0.6) !important;
+}
+
+/* ─── Navbar scrolled state ─── */
+html.light header {
+  color: #0f172a;
+}
+
+html.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+html.light .hover\:bg-slate-800:hover {
+  background-color: #e2e8f0 !important;
+}
+
+html.light .hover\:text-slate-200:hover {
+  color: #1e293b !important;
+}
+
+/* ─── Footer specific ─── */
+html.light footer {
+  background-color: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light footer .text-white {
+  color: #0f172a !important;
+}
+
+/* ─── Ambient Mesh Orbs ─── */
+html.light .mesh-orb {
+  opacity: 0.06;
+}
+
+/* ─── Grain Overlay ─── */
+html.light .grain-overlay {
+  opacity: 0.01;
+}
+
+/* ─── CommandPalette backdrop ─── */
+html.light .bg-black\/80 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   SHARED STYLES (both modes)
+   ═══════════════════════════════════════════════════ */
+
+/* ─── Scroll Progress Bar ─── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* ─── Ambient Mesh Orbs ─── */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.12;
+  animation: float-orb 20s ease-in-out infinite;
+}
+
+.mesh-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #6366f1, transparent 70%);
+  top: -10%;
+  left: -5%;
+}
+
+.mesh-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #a855f7, transparent 70%);
+  top: 35%;
+  right: -10%;
+}
+
+.mesh-orb-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #38bdf8, transparent 70%);
+  bottom: 10%;
+  left: 20%;
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* ─── Grain Overlay ─── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ─── Gradient Text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Typewriter Cursor ─── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #10b981;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ─── Avatar Glow ─── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px 4px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 30px 8px rgba(99, 102, 241, 0.5); }
+}
+
+.avatar-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+html.light .avatar-glow {
+  animation: none;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+}
+
+/* ─── Skill Shimmer ─── */
+.skill-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.03) 50%, transparent 75%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+html.light .skill-shimmer::after {
+  background: linear-gradient(110deg, transparent 25%, rgba(99,102,241,0.04) 50%, transparent 75%);
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
