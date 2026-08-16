@@ -11,7 +11,7 @@ interface CountUpProps {
 export const CountUp: React.FC<CountUpProps> = ({
   end,
   suffix = '',
-  duration = 1800,
+  duration = 2000,
   className = ''
 }) => {
   const ref = useRef(null);
@@ -27,7 +27,7 @@ export const CountUp: React.FC<CountUpProps> = ({
     const step = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - Math.pow(1 - progress, 4);
       setCount(Math.floor(eased * end));
       if (progress < 1) requestAnimationFrame(step);
     };

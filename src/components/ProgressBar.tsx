@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
 
 export const ProgressBar: React.FC = () => {

@@ -8,7 +8,7 @@ export interface Skill {
 export interface Project {
   id: string;
   title: string;
-  category: 'Web' | 'Full Stack' | 'AI' | 'Mobile' | 'Other';
+  category: 'Web' | 'Full Stack' | 'AI' | 'Mobile' | 'Systems' | 'Other' | string;
   description: string;
   detailedDescription: string;
   image: string;
@@ -63,6 +63,7 @@ export interface Profile {
     github: string;
     linkedin: string;
     email: string;
+    web3formsKey?: string;
   };
 }
 

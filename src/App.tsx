@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { portfolioData } from './data/portfolioData';
 import { Navbar } from './components/Navbar';
 import { BentoHero } from './components/BentoHero';
@@ -10,50 +10,50 @@ import { GitHubSection } from './components/GitHubSection';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ProgressBar } from './components/ProgressBar';
+import { CustomCursor } from './components/CustomCursor';
+import { PageLoader } from './components/PageLoader';
+import { Marquee } from './components/Marquee';
 
 export const App: React.FC = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem('theme');
-    return saved ? saved === 'dark' : true;
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [darkMode]);
-
   return (
-    <div className="min-h-screen font-sans antialiased overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen font-sans antialiased overflow-x-hidden bg-[#050505] text-[#FAFAFA]">
+      {/* Page loader */}
+      <PageLoader />
+
+      {/* Custom cursor (hidden on mobile via CSS) */}
+      <CustomCursor />
+
       {/* Scroll progress bar */}
       <ProgressBar />
 
-      {/* Animated ambient background */}
-      <div className="mesh-bg" aria-hidden="true">
-        <div className="mesh-orb mesh-orb-1" />
-        <div className="mesh-orb mesh-orb-2" />
-        <div className="mesh-orb mesh-orb-3" />
-      </div>
+      {/* Grain overlay */}
       <div className="grain-overlay" aria-hidden="true" />
 
       <div className="relative z-10">
-        <Navbar
-          profile={portfolioData.profile}
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-        />
+        <Navbar profile={portfolioData.profile} />
 
         <main>
           <BentoHero profile={portfolioData.profile} />
+
           <About profile={portfolioData.profile} />
+
+          {/* Divider marquee */}
+          <Marquee
+            items={['SOFTWARE ENGINEER', 'PROBLEM SOLVER', 'FULL STACK', 'AI ENTHUSIAST', 'LINUX', 'OPEN SOURCE']}
+            reverse
+            separator="◆"
+          />
+
           <TechRadar skills={portfolioData.skills} />
+
           <BentoProjects projects={portfolioData.projects} />
+
+          {/* Divider marquee */}
+          <Marquee
+            items={['REACT', 'JAVA', 'PYTHON', 'TYPESCRIPT', 'C', 'GIT', 'MONGODB', 'TAILWIND', 'NODE.JS', 'DSA']}
+            separator="●"
+          />
+
           <UnifiedTimeline
             education={portfolioData.education}
             certifications={portfolioData.certifications}
