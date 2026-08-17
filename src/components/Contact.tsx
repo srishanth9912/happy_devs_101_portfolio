@@ -32,45 +32,68 @@ export const Contact: React.FC<ContactProps> = ({ profile }) => {
     }
 
     setStatus('loading');
-    const accessKey = profile.socials.web3formsKey;
-
-    if (!accessKey) {
-      // Fallback: Mock success state if no key is configured in portfolioData.ts yet
-      console.warn(
-        'Form submission simulated. Go to src/data/portfolioData.ts and configure "web3formsKey" to receive real emails.'
-      );
-      setTimeout(() => {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
-      }, 1000);
-      return;
-    }
+    const accessKey = profile.socials.web3formsKey || (import.meta as any).env?.VITE_WEB3FORMS_KEY;
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: accessKey,
-          name,
-          email,
-          message,
-        }),
-      });
+      if (accessKey && accessKey.trim() !== '') {
+        // If web3forms access key is configured, submit to web3forms
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: accessKey.trim(),
+            name,
+            email,
+            message,
+          }),
+        });
 
-      const resData = await response.json();
-      if (response.status === 200 || resData.success) {
+        const resData = await response.json();
+        if (response.status === 200 || resData.success) {
+          setStatus('success');
+          setFormData({ name: '', email: '', message: '' });
+          setTimeout(() => setStatus('idle'), 5000);
+        } else {
+          throw new Error(resData.message || 'Something went wrong with form submission.');
+        }
+      } else {
+        // Submit via native Netlify Forms (URL-encoded POST)
+        const encode = (data: Record<string, string>) => {
+          return Object.keys(data)
+            .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+            .join('&');
+        };
+
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encode({
+            'form-name': 'contact',
+            name,
+            email,
+            message,
+          }),
+        });
+
+        if (response.ok || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          setStatus('success');
+          setFormData({ name: '', email: '', message: '' });
+          setTimeout(() => setStatus('idle'), 5000);
+        } else {
+          throw new Error('Could not submit form. Please try again or email directly.');
+        }
+      }
+    } catch (err: any) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.warn('Local dev form note: Netlify Forms triggers on live Netlify deployments.');
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        throw new Error(resData.message || 'Something went wrong.');
+        return;
       }
-    } catch (err: any) {
       setStatus('error');
       setErrorMsg(err.message || 'Submission failed. Please try again.');
     }
@@ -139,7 +162,22 @@ export const Contact: React.FC<ContactProps> = ({ profile }) => {
           {/* Contact form */}
           <ScrollReveal className="lg:col-span-7" direction="right" delay={0.1}>
             <div className="cyber-card p-8 rounded-2xl">
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                {/* Hidden inputs for Netlify Form Handling */}
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden" aria-hidden="true">
+                  <label>
+                    Don't fill this out: <input name="bot-field" onChange={handleChange} />
+                  </label>
+                </p>
+
                 {(['name', 'email'] as const).map((field) => (
                   <div key={field} className="space-y-2">
                     <label htmlFor={`form-${field}`} className="text-xs font-mono uppercase tracking-[0.2em] text-white/30">
